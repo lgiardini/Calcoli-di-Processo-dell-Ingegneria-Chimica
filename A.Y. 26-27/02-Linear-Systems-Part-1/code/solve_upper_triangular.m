@@ -7,12 +7,12 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%          Author: Marco Mehl <marco.mehl@polimi.it>                      %
-%                  Timoteo Dinelli <timoteo.dinelli@polimi.it>            %
-%          CRECK Modeling Lab <www.creckmodeling.polimi.it>               %
-%          Department of Chemistry, Materials and Chemical Engineering    %
-%          Politecnico di Milano                                          %
-%          P.zza Leonardo da Vinci 32, 20133 Milano                       %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 function x = solve_upper_triangular(A, b)
@@ -24,15 +24,16 @@ function x = solve_upper_triangular(A, b)
     n = length(b);
     x = zeros(n, 1);  % Initialize solution vector
     
-    % Start from the last equation: x_n = b_n / U(n,n)
-    x(n) = b(n) / A(n, n);
-    
     % Work backwards from row n-1 to 1
-    for i = n-1:-1:1
+    for i = n:-1:1
+
         % Compute sum of known terms: A(i,j)*x(j) for j > i
         sum_terms = 0;
-        for j = i+1:n
-            sum_terms = sum_terms + A(i, j) * x(j);
+        if i~=n % If i==n, no contribution from known terms
+                % and this loop is skipped
+            for j = i+1:n % Loop on known terms
+                sum_terms = sum_terms + A(i, j) * x(j);
+            end
         end
         
         % Solve for x(i)

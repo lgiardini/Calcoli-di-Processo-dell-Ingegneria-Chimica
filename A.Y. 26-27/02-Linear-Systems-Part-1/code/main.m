@@ -7,12 +7,12 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%          Author: Marco Mehl <marco.mehl@polimi.it>                      %
-%                  Timoteo Dinelli <timoteo.dinelli@polimi.it>            %
-%          CRECK Modeling Lab <www.creckmodeling.polimi.it>               %
-%          Department of Chemistry, Materials and Chemical Engineering    %
-%          Politecnico di Milano                                          %
-%          P.zza Leonardo da Vinci 32, 20133 Milano                       %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 clear variables
