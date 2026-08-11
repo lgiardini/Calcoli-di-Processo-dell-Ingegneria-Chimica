@@ -18,19 +18,21 @@
 clear, close, clc
 
 % Test machine epsilon implementation
-eps_computed = macheps_implementation();
-eps_builtin = eps(1.0);  % Compare with built-in function
+N = 1.0
+eps_computed = macheps_implementation(N);
+eps_builtin = eps(N);  % Compare with built-in function
 
 % Display comparison
 fprintf('Computed machine epsilon: %.16e\n', eps_computed);
 fprintf('Built-in machine epsilon: %.16e\n', eps_builtin);
 fprintf('Difference: %.16e\n', abs(eps_computed - eps_builtin));
 
-function epsilon = macheps_implementation()
-    epsilon = 1.0; % Initialize epsilon to 1
-    while (1.0 + epsilon/2) > 1.0
-        % Iterate as long as 1.0 + epsilon/2 is distinguishable from 1.0
-        epsilon = epsilon / 2; % Halve epsilon at each iteration
+function my_eps = macheps_implementation(N) 
+                % N is the number we want the machEps of
+    my_eps = N; % Initialize epsilon to 1
+    while (N + my_eps/2) > N
+        % Iterate as long as N + epsilon/2 is distinguishable from N
+        my_eps = my_eps / 2 % Halve epsilon at each iteration
     end
     % At the end of the loop, epsilon is the machine epsilon
     % (the smallest value where 1.0 + epsilon > 1.0)
