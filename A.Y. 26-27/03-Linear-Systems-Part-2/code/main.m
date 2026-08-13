@@ -7,12 +7,12 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%          Author: Marco Mehl <marco.mehl@polimi.it>                      %
-%                  Timoteo Dinelli <timoteo.dinelli@polimi.it>            %
-%          CRECK Modeling Lab <www.creckmodeling.polimi.it>               %
-%          Department of Chemistry, Materials and Chemical Engineering    %
-%          Politecnico di Milano                                          %
-%          P.zza Leonardo da Vinci 32, 20133 Milano                       %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 clear variables
@@ -20,7 +20,8 @@ clc
 
 %% Exercise 1
 % Define a system where scaling matters
-A1 = [2, 100000; 1, 1];
+A1 = [  2, 100000; 
+        1,      1];
 b1 = [100000; 2];
 
 fprintf('System Matrix A:\n');
@@ -60,9 +61,9 @@ fprintf('Error: ||x_exact - x_scaled|| = %.2e\n\n', norm(x_exact - x_scaled));
 %% Exercise 2: 3x3 System from Lecture Slides
 fprintf('========== EXAMPLE 2: 3x3 System ==========\n\n');
 
-A2 = [2, 1, -1;
-      -3, -1, 2;
-      -2, 1, 2];
+A2 = [+2, +1, -1;
+      -3, -1, +2;
+      -2, +1, +2];
 b2 = [8; -11; -3];
 
 fprintf('System Matrix A:\n');
@@ -88,7 +89,7 @@ fprintf('Residual ||Ax - b|| = %.2e\n\n', norm(residual));
 % Hilbert matrix (notoriously ill-conditioned)
 n = 4;
 A3 = hilb(n);
-b3 = sum(A3, 2); % Solution should be x = [1, 1, 1, 1]^T
+b3 = sum(A3, 2); % Setting the solution to be x = [1, 1, 1, 1]^T
 
 fprintf('Hilbert Matrix (4x4) - highly ill-conditioned:\n');
 disp(A3);

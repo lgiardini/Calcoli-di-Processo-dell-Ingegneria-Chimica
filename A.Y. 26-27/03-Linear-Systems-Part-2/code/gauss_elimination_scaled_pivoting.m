@@ -7,20 +7,25 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%          Author: Marco Mehl <marco.mehl@polimi.it>                      %
-%                  Timoteo Dinelli <timoteo.dinelli@polimi.it>            %
-%          CRECK Modeling Lab <www.creckmodeling.polimi.it>               %
-%          Department of Chemistry, Materials and Chemical Engineering    %
-%          Politecnico di Milano                                          %
-%          P.zza Leonardo da Vinci 32, 20133 Milano                       %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 function [A, b] = gauss_elimination_scaled_pivoting(A, b)
-    [rA, cA] = size(A); % Get the size of the input matrix
+    [rA, ~] = size(A); % Get the size of the input matrix
+    % Returns [rows, cols], but cols are never used 
+    % and should be the same as rows anyway
+
     W = [A b]; % Create the working matrix
     
     % Compute scaling factors ONCE at the beginning
     s = max(abs(W(:, 1:rA)), [], 2);
+    % Computes the maximum row-by-row (2=goes along direction '2')
+    % and only compares the values in the range corresponding to A-matrix
     
     for i = 1 : rA-1 % for all the rows i but the last one
         
