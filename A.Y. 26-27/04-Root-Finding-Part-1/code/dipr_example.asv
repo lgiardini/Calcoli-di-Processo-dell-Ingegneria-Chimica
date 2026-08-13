@@ -50,11 +50,6 @@ options = optimset('Display', 'iter',...          % Show iteration progress
 % Starting guess: 310 K
 [sol_fsolve, fval_fsolve, exitFlag_fsolve] = fsolve(@target, 310, options);
 
-% Alternative, more general
-% sol_general = fsolve(@(T)target_generalized(T,0.5*101325), 310,options);
-% You can pass the arguments directly from here, so that the actual
-% function is cleaner and can be used multiple times.
-
 %% Visualization of results
 
 % Create new figure
@@ -100,31 +95,17 @@ function P = PVapH2O(T)
     P = exp(A + B./T + C .* log(T) + D * T.^E);
 end
 
-function res = target(T)
+function f = target(T)
     % Target function to find zero
     % Calculates difference between vapor pressure at T and target pressure
     % Input: T - Temperature in Kelvin
-    % Output: res - Difference between calculated and target pressure
+    % Output: f - Difference between calculated and target pressure
     
     % Target pressure: 0.5 atm (in Pa)
-    res = PVapH2O(T) - 5.0662e4;
+    f = PVapH2O(T) - 5.0662e4;
 
     % Possible objective functions:
-    % res = value - target      % "Absolute error"
-    % res = 1 - value/target    % "Relative error"
-    % res = log(value/target)   % "Logarithmic error"
-    % Why use one or the other?
-    % If the root-finding is 1-dimensional, there is no difference.
-    % If it is N-dimensional, using relative or logarithmic errors may help
-    % the solver achieve a solution.
-end
-
-function res = target_generalized(T,P)
-% Target function to find zero
-% Calculates difference between vapor pressure at T and target pressure P
-% Input: T - Temperature in Kelvin
-%        P - pressure in Pa
-% Output: res - Difference between calculated and target pressure
-
-res = PVapH2O(T) - P;
+    % res = value-target
+    % res = 1- value/target
+    % 
 end

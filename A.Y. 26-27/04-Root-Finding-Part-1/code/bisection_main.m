@@ -7,12 +7,12 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%   Author: Marco Mehl <marco.mehl@polimi.it>                             %
-%           Timoteo Dinelli <timoteo.dinelli@polimi.it>                   %
-%   CRECK Modeling Group <http://creckmodeling.polimi.it>                 %
-%   Department of Chemistry, Materials and Chemical Engineering           %
-%   Politecnico di Milano                                                 %
-%   P.zza Leonardo da Vinci 32, 20133 Milano                              %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 % Clear workspace, figures, and command window for a fresh start
@@ -22,14 +22,14 @@ clc        % Clears command window
 f = @(x) x.^2 - 2;  % Find sqrt(2)
 a = 0;              % Left endpoint
 b = 2;              % Right endpoint
-eps = 1e-6;         % Tolerance
+tol = 1e-6;         % Tolerance
 
 % Run visualization
-[root, iterations] = BisectionWithVisualization(f, a, b, eps);
+[root, iterations] = BisectionWithVisualization(f, a, b, tol);
 fprintf('Root found at x = %.6f after %d iterations\n', root, iterations);
 
 %% Function definition
-function [c, iter] = BisectionWithVisualization(funz, a, b, eps)
+function [c, iter] = BisectionWithVisualization(funz, a, b, tol)
     % BISECTIONWITHVISUALIZATION Visualize Bisection method iterations
     %   [c, iter] = BisectionWithVisualization(funz, a, b, eps) finds and
     %   visualizes the root-finding process using the Bisection method
@@ -58,7 +58,7 @@ function [c, iter] = BisectionWithVisualization(funz, a, b, eps)
     
     % Check Bolzano's theorem condition
     if sign(fa)*sign(fb) < 0
-        while abs(b-a) > eps && iter <= maxIter
+        while abs(b-a) > tol && iter <= maxIter
             % Clear current plots
             clf;
             

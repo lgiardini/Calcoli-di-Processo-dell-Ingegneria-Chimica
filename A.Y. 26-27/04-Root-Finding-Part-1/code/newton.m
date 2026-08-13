@@ -7,15 +7,15 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%   Author: Marco Mehl <marco.mehl@polimi.it>                             %
-%           Timoteo Dinelli <timoteo.dinelli@polimi.it>                   %
-%   CRECK Modeling Group <http://creckmodeling.polimi.it>                 %
-%   Department of Chemistry, Materials and Chemical Engineering           %
-%   Politecnico di Milano                                                 %
-%   P.zza Leonardo da Vinci 32, 20133 Milano                              %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
-function [solution, error] = newton(x0, f, tol, maxiter)
+function [solution, error] = newton(f, x0, tol, maxiter)
     % NEWTON Implements the Newton-Raphson method to find function zeros
     %
     % This function implements the Newton-Raphson method to find the root
@@ -35,7 +35,7 @@ function [solution, error] = newton(x0, f, tol, maxiter)
     %
     % Example:
     %   f = @(x) x^2 - 4;            % Function: x^2 - 4 = 0
-    %   [sol, err] = Newton(1, f, 1e-6, 100);
+    %   [sol, err] = Newton(f, 1, 1e-6, 100);
     %
     % Notes:
     %   - The method may not converge if the initial guess is too far from
@@ -68,7 +68,7 @@ function [solution, error] = newton(x0, f, tol, maxiter)
 
     % Print header for iteration progress
     fprintf("%-s\t\t %-s\t\t %-s\t\t %-s\t\t %-s\t\t \n", ...
-        "Iter", "x0", "f(x0)", "x0+1", "error");
+        "Iter", "xn", "f(xn)", "xn+1", "error");
 
     % Main iteration loop
     while error(iteration_number) > tol && iteration_number < maxiter

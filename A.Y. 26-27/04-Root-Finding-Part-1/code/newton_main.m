@@ -7,12 +7,12 @@
 %                                                                         %
 %-------------------------------------------------------------------------%
 %                                                                         %
-%   Author: Marco Mehl <marco.mehl@polimi.it>                             %
-%           Timoteo Dinelli <timoteo.dinelli@polimi.it>                   %
-%   CRECK Modeling Group <http://creckmodeling.polimi.it>                 %
-%   Department of Chemistry, Materials and Chemical Engineering           %
-%   Politecnico di Milano                                                 %
-%   P.zza Leonardo da Vinci 32, 20133 Milano                              %
+%       Author: Marco Mehl <marco.mehl@polimi.it>                         %
+%               Lorenzo Giardini <lorenzo.giardini@polimi.it>             %
+%        CRECK Modeling Lab <www.creckmodeling.polimi.it>                 %
+%        Department of Chemistry, Materials and Chemical Engineering      %
+%        Politecnico di Milano                                            %
+%        P.zza Leonardo da Vinci 32, 20133 Milano                         %
 %                                                                         %
 % ----------------------------------------------------------------------- %
 f = @(x) x.^2 - 4;           % Example function: x^2 - 4
@@ -20,8 +20,9 @@ visualize_newton(f);
 
 function visualize_newton(f)
     % Define the function and its derivative
-
-    dfdx = @(f,x) (f(x+1e-6) - f(x))/1e-7;  % Numerical derivative
+    
+    step_deriv = sqrt(eps);
+    dfdx = @(f,x) (f(x+step_deriv) - f(x))/step_deriv;  % Numerical derivative
     
     % Parameters for Newton method
     x0 = 3;              % Initial guess
